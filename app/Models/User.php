@@ -21,6 +21,17 @@ class User extends Model
         return $query->where('user_type', 'player');
     }
 
+    /**
+     * Players only local scope
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfGoalies($query): Builder
+    {
+        return $query->where('can_play_goalie', 1);
+    }
+
     public function getIsGoalieAttribute(): bool
     {
         return (bool) $this->can_play_goalie;
