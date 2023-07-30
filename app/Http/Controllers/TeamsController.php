@@ -22,6 +22,7 @@ class TeamsController extends Controller
                 break;
             }
         }
+        if($numberOfTeams % 2 == 1) $numberOfTeams--;
 
         //Problem 2: Solved evenly match teams
         $teams = [];
