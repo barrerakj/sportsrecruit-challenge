@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Services\TeamsService;
 use App\Repositories\PlayerRepository;
 
@@ -21,6 +19,7 @@ class TeamsController extends Controller
 
         $numberOfTeams = $teamsService->getNumberOfTeams($goaliesCount, $playersCount);
         $teams = $teamsService->getBalancedTeams($numberOfTeams, $goalies, $players);
+
         return view('teams', ['teams' => $teams]);
     }
 }

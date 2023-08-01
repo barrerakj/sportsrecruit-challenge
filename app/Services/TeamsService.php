@@ -37,7 +37,7 @@ class TeamsService
      * @return array
      */
     public function getBalancedTeams(int $numberOfTeams, Collection $goalies, Collection $players): array
-    {
+    {   
         $teams = [];
 
         for ($i=0; $i < $numberOfTeams; $i++) { 

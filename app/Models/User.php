@@ -10,6 +10,12 @@ class User extends Model
 {
     public $timestamps = false;
 
+    public $fillable = [
+        'first_name',
+        'last_name',
+        'ranking',
+    ];
+
     /**
      * Players only local scope
      *
