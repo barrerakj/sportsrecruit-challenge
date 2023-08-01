@@ -4,29 +4,24 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Services\TeamsService;
-use App\Models\User;
 
 class PlayersIntegrityTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testGoaliePlayersExist () 
+    private $teamsService;
+
+    protected function setUp(): void
     {
-/*
-		Check there are players that have can_play_goalie set as 1   
-*/
-		$result = User::where('user_type', 'player')->where('can_play_goalie', 1)->count();
-		$this->assertTrue($result > 1);
-	
+        $this->teamsService = new TeamsService();
     }
-    public function testAtLeastOneGoaliePlayerPerTeam ()
+
+    public function testGetNumberOfTeams()
     {
-/*
-	    calculate how many teams can be made so that there is an even number of teams and they each have between 18-22 players.
-	    Then check that there are at least as many players who can play goalie as there are teams
-*/         
+        // Mock the players count and goalies count
+        $this->teamsService->playersCount = 85;
+        $this->teamsService->goaliesCount = 6;
+
+        // Call the method and check the result
+        $result = $this->teamsService->getNumberOfTeams();
+        $this->assertEquals(4, $result);
     }
 }

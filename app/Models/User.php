@@ -22,7 +22,7 @@ class User extends Model
     }
 
     /**
-     * Players only local scope
+     * Goalies only local scope
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder

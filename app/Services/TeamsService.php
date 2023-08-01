@@ -3,27 +3,15 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class TeamsService
 {
-    public $players;
-    public $goalies;
-    public $playersCount;
-    public $goaliesCount;
-    
-    function __construct()
-    {
-        $this->players = User::ofPlayers()->orderBy('ranking', 'desc')->get();
-        $this->goalies = User::ofGoalies()->orderBy('ranking', 'desc')->get();
-        $this->playersCount = User::ofPlayers()->count();
-        $this->goaliesCount = User::ofGoalies()->count();
-    }
-
-    public function getNumberOfTeams(): int
+    public function getNumberOfTeams(int $goaliesCount, int $playersCount): int
     {
         $numberOfTeams = 0;
-        for ($i=$this->goaliesCount; $i > 0; $i--) { 
-            if(intdiv($this->playersCount, $i) >= 18){
+        for ($i=$goaliesCount; $i > 0; $i--) { 
+            if(intdiv($playersCount, $i) >= 18){
                 $numberOfTeams = $i;
                 break;
             }
@@ -33,16 +21,15 @@ class TeamsService
         return $numberOfTeams;
     }
 
-    public function getBalancedTeams(): array
+    public function getBalancedTeams(int $numberOfTeams, Collection $goalies, Collection $players): array
     {
         $teams = [];
-        $numberOfTeams = $this->getNumberOfTeams();
 
         for ($i=0; $i < $numberOfTeams; $i++) { 
             array_push($teams, ["name" => fake()->name(), "players" => collect()]);
         }
 
-        $allPlayers = $this->goalies->merge($this->players);
+        $allPlayers = $goalies->merge($players);
 
         for ($i=0; $i < $numberOfTeams; $i++) { 
             $teams[$i]["players"]->push($allPlayers->shift());
