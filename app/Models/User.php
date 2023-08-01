@@ -32,11 +32,21 @@ class User extends Model
         return $query->where('can_play_goalie', 1);
     }
 
+    /**
+     * Is goalie
+     *
+     * @return bool
+     */
     public function getIsGoalieAttribute(): bool
     {
         return (bool) $this->can_play_goalie;
     }
 
+    /**
+     * First name and lastname concatenated
+     *
+     * @return string
+     */
     public function getFullnameAttribute(): string
     {
         return Str::title($this->first_name . ' ' . $this->last_name);

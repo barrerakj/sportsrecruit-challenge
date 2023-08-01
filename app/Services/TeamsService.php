@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TeamsService
 {
+    /**
+     * Get number of teams
+     *
+     * @param int $goaliesCount
+     * @param int $playersCount
+     * @return int
+     */
     public function getNumberOfTeams(int $goaliesCount, int $playersCount): int
     {
         $numberOfTeams = 0;
@@ -21,6 +28,14 @@ class TeamsService
         return $numberOfTeams;
     }
 
+    /**
+     * Get balanced teams
+     *
+     * @param int
+     * @param \Illuminate\Database\Eloquent\Collection $goalies
+     * @param \Illuminate\Database\Eloquent\Collection $players
+     * @return array
+     */
     public function getBalancedTeams(int $numberOfTeams, Collection $goalies, Collection $players): array
     {
         $teams = [];
