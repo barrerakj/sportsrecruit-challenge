@@ -5,8 +5,6 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Services\TeamsService;
 use App\Repositories\PlayerRepository;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 
 class PlayersIntegrityTest extends TestCase
 {
